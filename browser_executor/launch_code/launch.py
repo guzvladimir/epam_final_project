@@ -11,7 +11,7 @@ class RunPythonCode(object):
             os.mkdir("input_code")
 
     def _run_py_process(self, cmd="code.py"):
-        args = [sys.executable, cmd, "os", "open", "exec", "eval"]
+        args = [sys.executable, cmd]
         if self.stdin == None:
 
             process = Popen(
