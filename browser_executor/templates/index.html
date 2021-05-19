@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browser code executor</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <form id="panels" name="form" method="POST" action="{{ url_for(target) }}">
+        <div class="code">
+            <h3 class="title">Code</h3>
+            <textarea spellcheck="false" name="input_code">{{code}}</textarea>
+        </div>
+        <div class="stdin">
+            <h3 class="title">Input</h3>
+            <textarea spellcheck="false" name="input_stdin"></textarea>
+        </div>
+        <div class="launch">
+            <input id="launch-button" type="submit" value="Launch">
+        </div>
+        <div class="stdout">
+            <h3 class="title">Output</h3>
+            <textarea readonly spellcheck="false" id="output" style="white-space: pre-line">
+                {{output}}
+            </textarea>
+        </div>
+        <div class="stderr">
+            <h3 class="title">Error</h3>
+            <textarea readonly spellcheck="false" id="output_error" style="white-space: pre-line">
+                {{output_error}}
+            </textarea>
+        </div>
+    </form>
+</body>
+</html>
