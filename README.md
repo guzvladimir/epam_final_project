@@ -1,6 +1,8 @@
 # EPAM final project
 _______
 *Full description will soon appear*
+- Install [Docker](https://www.docker.com/)
+
 ## Executor of python code in browser
 - Copy project
 ```
