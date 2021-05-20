@@ -1,18 +1,14 @@
 # EPAM final project
 _______
 *Full description will soon appear*
-- Install [Docker](https://www.docker.com/)
-
 ## Executor of python code in browser
-- Copy project
+- Install [Docker](https://www.docker.com/)
+- Download container image
 ```
-https://github.com/guzvladimir/epam_final_project.git 
+docker pull guzvladimir/flask_browser_code_executor
 ```
-- Install requirements
-``` 
-pip3 install -r requirements.txt --user 
+- Run project
 ```
-- Run python
+docker run -d -p <your port>:5000 guzvladimir/flask_browser_code_executor
 ```
-python browser_executor/main.py 
-```
+
