@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+browser_executor/lib/
 lib64/
 parts/
 sdist/
