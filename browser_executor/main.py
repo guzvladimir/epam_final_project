@@ -1,48 +1,48 @@
-import os
+import configparser
+from subprocess import PIPE, Popen, TimeoutExpired
 
-from flask import Flask, render_template, request
-from launch_code import launch
+from flask import Flask, json, render_template, request
 
 app = Flask(__name__)
 
-default = """
-print("Hello world!")
 
-name = input()
-print(f'Hello {name}!')
+def get_data_from_file(name):
+    with open(f"configuration_file/{name}", "r") as file:
+        return file.read()
 
-for i in range(5):
-    print(i, end=' ')
-"""
+
+injection = get_data_from_file("injection.txt")
+
+config = configparser.ConfigParser()
+config.read("configuration_file/config.ini")
 
 
 @app.route("/")
-@app.route("/launch", methods=["POST", "GET"])
-def runpy():
-    if request.method == "POST":
-        code = request.form["input_code"]
-        stdin = request.form["input_stdin"]
-        data, temp = os.pipe()
+def index():
+    return render_template("index.html")
 
-        os.write(temp, bytes(stdin, "utf-8"))
-        os.close(temp)
-        run = launch.RunPythonCode(code, data)
-        output_error, output = run.run_py_code()
-        print(output, output_error)
-        if not output:
-            output = "No output"
-    else:
-        code = default
-        output = "No output"
-        output_error = "No errors"
 
-    return render_template(
-        "index.html",
-        code=code,
-        target="runpy",
-        output=output,
-        output_error=output_error,
-    )
+@app.route("/launch", methods=["POST"])
+def launch():
+    code = injection + request.form["input_code"]
+    stdin = request.form["input_stdin"]
+    args = [
+        "python",
+        "-c",
+        code,
+        config["blocked"]["imports"],
+        config["blocked"]["functions"],
+    ]
+
+    process = Popen(args, stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding="utf-8")
+    try:
+        stdout, stderr = process.communicate(stdin, timeout=5)
+    except TimeoutExpired as timeout:
+        return json.dumps(
+            {"output": "There's an error in your program", "error": str(timeout)}
+        )
+
+    return json.dumps({"output": str(stdout), "error": str(stderr)})
 
 
 if __name__ == "__main__":

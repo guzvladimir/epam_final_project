@@ -3,33 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Browser code executor</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='script.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <form id="panels" name="form" method="POST" action="{{ url_for(target) }}">
+    <form id="panels" name="form" method="post">
         <div class="code">
             <h3 class="title">Code</h3>
-            <textarea spellcheck="false" name="input_code">{{code}}</textarea>
+            <textarea spellcheck="false" id="code" name="input_code">
+
+print("Hello, world!")
+
+name = input()
+print(f'Hello, {name}!')
+
+for i in range(5):
+    print(i)
+
+exec("print('Hello, world!')")
+</textarea>
         </div>
         <div class="stdin">
             <h3 class="title">Input</h3>
-            <textarea spellcheck="false" name="input_stdin"></textarea>
+            <textarea spellcheck="false" name="input_stdin">Vladimir</textarea>
         </div>
-        <div class="launch">
-            <input id="launch-button" type="submit" value="Launch">
+        <div class="control">
+            <input type="button" value="Launch" onclick="launch()">
         </div>
-        <div class="stdout">
+        <div class="output">
             <h3 class="title">Output</h3>
-            <textarea readonly spellcheck="false" id="output" style="white-space: pre-line">
-                {{output}}
-            </textarea>
+            <textarea readonly spellcheck="false" id="output" style="white-space: pre-line"></textarea>
         </div>
-        <div class="stderr">
+        <div class="error">
             <h3 class="title">Error</h3>
-            <textarea readonly spellcheck="false" id="output_error" style="white-space: pre-line">
-                {{output_error}}
-            </textarea>
+            <textarea readonly spellcheck="false" id="error" style="white-space: pre-line"></textarea>
         </div>
     </form>
 </body>
 </html>
+
+<!--<script>-->
+<!--    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code'), {-->
+<!--  matchBrackets: true,             // подсвечивать парные скобки-->
+<!--  mode: 'python', // стиль подсветки-->
+<!--  indentUnit: 4-->
+
+<!--});-->
+<!--function showCode()-->
+<!--{-->
+<!--    var text = myCodeMirror.mirror.getCode();-->
+<!--    alert(text);-->
+<!--}-->
+<!--</script>-->
