@@ -15,10 +15,10 @@ There are some specifications:
 - Install [Docker](https://www.docker.com/)
 - Download container image
 ```
-docker pull guzvladimir/flask_browser_code_executor
+docker pull guzvladimir/browser_executor
 ```
 - Run project
 ```
-docker run -d -p <your port>:5000 guzvladimir/flask_browser_code_executor
+docker run -d -p <your port>:5000 guzvladimir/browser_executor
 ```
 ![alt text](task/example.png)
