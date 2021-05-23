@@ -6,7 +6,7 @@ from flask import Flask, json, render_template, request
 app = Flask(__name__)
 
 
-def get_data_from_file(name):
+def get_data_from_file(name: str) -> str:
     with open(f"configuration_file/{name}", "r") as file:
         return file.read()
 
@@ -23,7 +23,7 @@ def index():
 
 
 @app.route("/launch", methods=["POST"])
-def launch():
+def launch() -> str:
     code = injection + request.form["input_code"]
     stdin = request.form["input_stdin"]
     args = [
@@ -35,6 +35,7 @@ def launch():
     ]
 
     process = Popen(args, stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding="utf-8")
+
     try:
         stdout, stderr = process.communicate(stdin, timeout=5)
     except TimeoutExpired as timeout:
