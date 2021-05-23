@@ -2,7 +2,7 @@
 _______
 
 ## Executor of python code in browser
-It's a web form with two input fileds ("Code" and "Input"). In the "Code" field we enter a file code. In the "Input" field we enter some input (if exist).
+It's a web form with two input fileds ("Code" and "Input"). In the "Code" field we enter a file code. In the "Input" field we enter some input (if exists).
 
 There is a "Launch" button. Pushing it execute the code on the server. After that, stdout and stderr will appear in the field "Output" and "Error". 
 
