@@ -22,3 +22,19 @@ docker pull guzvladimir/browser_executor
 docker run -d -p <your port>:5000 guzvladimir/browser_executor
 ```
 ![alt text](task/example.png)
+
+Or we can run it without Docker
+- Download [Git](https://git-scm.com/)
+- Install Git
+- Download project
+```
+
+```
+- Install requirements
+```
+pip install -r requirements.txt
+```
+- Run project
+```
+python browser_executor/main.py
+```
