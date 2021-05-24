@@ -23,7 +23,7 @@ docker run -d -p <your port>:5000 guzvladimir/browser_executor
 ```
 ![alt text](task/example.png)
 
-- Or we can run it without Docker
+#### Or we can run it without Docker
 - Download [Git](https://git-scm.com/)
 - Install Git
 - Download project
